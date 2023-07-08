@@ -19,22 +19,22 @@ services:
     devices:
       - '/dev:/dev'
 
-  crazyswarm2-ros2:
-    build: 
-      context: ./
-      target: crazyswarm2-ros2
-    container_name: crazyswarm2-ros2
-    environment:
-      - DISPLAY=${DISPLAY}
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - ./crazyswarm2:/crazyswarm2
-    network_mode: "host"
-    extra_hosts:
-      - "optitrackPC:192.168.2.199"
-    privileged: true
-    devices:
-      - '/dev:/dev'
+  # crazyswarm2-ros2:
+  #   build: 
+  #     context: ./
+  #     target: crazyswarm2-ros2
+  #   container_name: crazyswarm2-ros2
+  #   environment:
+  #     - DISPLAY=${DISPLAY}
+  #   volumes:
+  #     - /tmp/.X11-unix:/tmp/.X11-unix
+  #     - ./crazyswarm2:/crazyswarm2
+  #   network_mode: "host"
+  #   extra_hosts:
+  #     - "optitrackPC:192.168.2.199"
+  #   privileged: true
+  #   devices:
+  #     - '/dev:/dev'
 
   cfclient:
     build:
