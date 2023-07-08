@@ -68,6 +68,7 @@ RUN apt-get install -y \
     ffmpeg 
 
 RUN apt install -y \
+    libqt5x11extras5 \
     libxcb-xinerama0 \
     usbutils \
     python3-pip 
