@@ -1,0 +1,33 @@
+version: '3.9'
+services:
+
+  crazyflie-ros:
+    build: 
+      context: ./
+      target: crazyflie-ros
+    container_name: crazyflie-ros
+    environment:
+      - "CSW_PYTHON=python3"
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./crazyswarm:/crazyswarm
+    network_mode: "host"
+    extra_hosts:
+      - "optitrackPC:192.168.2.199"
+    privileged: true
+    devices:
+      - '/dev:/dev'
+
+  cfclient:
+    build:
+      context: ./
+      target: cfclient
+    container_name: cfclient
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    privileged: true
+    devices:
+      - '/dev:/dev'
