@@ -82,9 +82,11 @@ RUN apt-get update
 RUN apt install -y \
     libboost-program-options-dev \
     libusb-1.0-0-dev
-RUN pip3 install rowan cflib transforms3d 
 RUN apt-get install -y \
-    ros-${ROS_DISTRO}-tf-transformations
+    ros-${ROS_DISTRO}-tf-transformations \
+    python3-pip
+RUN pip3 install rowan cflib transforms3d
+WORKDIR crazyswarm2 
 CMD tail -f /dev/null
 
 # Cfclient docker image
