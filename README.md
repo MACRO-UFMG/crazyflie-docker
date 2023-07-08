@@ -22,9 +22,9 @@ docker compose up <service>
 ```
 
 Services:
-- crazyflie-ros
+- crazyswarm-ros
 - cfclient
-- crazyflie-ros2 (WIP)
+- crazyswarm2-ros2 (WIP)
 
 Rremove stopped containers with
 ```bash
