@@ -49,7 +49,10 @@ RUN ${CSW_PYTHON} -m pip install \
     matplotlib \
     ffmpeg-python \
     tk \
-    pipdeptree
+    pipdeptree \
+    pandas \
+    casadi \
+    IPython
 RUN echo "source /crazyswarm/ros_ws/devel/setup.bash" >> /root/.bashrc 
 WORKDIR crazyswarm
 CMD stdbuf -o L roscore

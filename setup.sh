@@ -1,5 +1,5 @@
 
-for dir in . crazyswarm crazyswarm/ros_ws/src/crazyflie_tools/ crazyswarm/ros_ws/src/crazyswarm/externalDependencies/libmotioncapture/ crazyswarm2/ros2_ws/src/crazyswarm2/ crazyswarm2/ros2_ws/src/motion_capture_tracking; do
+for dir in . crazyswarm crazyswarm/ros_ws/src/crazyflie_tools/ crazyswarm/ros_ws/src/crazyswarm/externalDependencies/libmotioncapture/; do
     echo Cloning submodules at \"$dir\"...
     cd $dir
     git submodule init
