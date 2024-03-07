@@ -23,8 +23,6 @@ docker compose up <service>
 
 Services:
 - crazyswarm-ros
-- cfclient
-- crazyswarm2-ros2 (WIP)
 
 Rremove stopped containers with
 ```bash
