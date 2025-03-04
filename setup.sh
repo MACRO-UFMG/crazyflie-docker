@@ -1,12 +1,5 @@
 
-for dir in . crazyswarm crazyswarm/ros_ws/src/crazyflie_tools/ crazyswarm/ros_ws/src/crazyswarm/externalDependencies/libmotioncapture/ crazyswarm2/ros2_ws/src/crazyswarm2/ crazyswarm2/ros2_ws/src/motion_capture_tracking; do
-    echo Cloning submodules at \"$dir\"...
-    cd $dir
-    git submodule init
-    git submodule update --recursive
-    cd -
-    echo 
-done
+git submodule update --init --recursive
 
 docker compose build
 docker compose run crazyswarm-ros bash -c "cd ros_ws/src/crazyswarm/scripts/pycrazyswarm/cfsim && make"
