@@ -105,6 +105,7 @@ RUN apt-get install -y \
 RUN apt install -y \
     libqt5x11extras5 \
     libxcb-xinerama0 \
+    libxcb-cursor0 \
     usbutils \
     python3-pip 
 RUN pip3 install --upgrade pip
