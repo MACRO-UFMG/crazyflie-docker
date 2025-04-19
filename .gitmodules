@@ -1,6 +1,7 @@
 [submodule "crazyswarm"]
 	path = crazyswarm
 	url = git@github.com:MACRO-UFMG/crazyswarm.git
+	branch = master
 [submodule "crazyswarm2/ros2_ws/src/crazyswarm2"]
 	path = crazyswarm2/ros2_ws/src/crazyswarm2
 	url = https://github.com/IMRCLab/crazyswarm2
