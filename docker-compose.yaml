@@ -46,3 +46,13 @@ services:
     privileged: true
     devices:
       - '/dev:/dev'
+
+  crazysim:
+    build:
+      context: ./
+      target: crazysim
+    container_name: crazysim
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix

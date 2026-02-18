@@ -108,3 +108,55 @@ RUN apt install -y \
 RUN pip3 install --upgrade pip
 RUN pip3 install cfclient
 CMD cfclient
+
+# Docker image for crazysim
+FROM ros2-base AS crazysim
+ENV DEBIAN_FRONTEND noninteractive
+# Debian dependencies for Crazyflie Firmware, cfclient and others
+RUN apt-get update
+RUN apt-get install -y \
+    git \
+    tree \
+    dos2unix \
+    vim \
+    cmake \
+    build-essential \
+    lsb-release \
+    curl \
+    gnupg \
+    libqt5x11extras5 \
+    libxcb-xinerama0 \
+    libxcb-cursor0 \
+    usbutils \
+    python3-pip 
+RUN pip3 install --upgrade pip
+RUN pip3 install Jinja2
+RUN ln -sf /usr/bin/python3 /usr/bin/python
+# Install Gazebo
+RUN curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] https://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null 
+RUN apt-get update
+RUN apt-get install -y gz-garden
+# Clone CrazySim
+RUN git clone https://github.com/gtfactslab/CrazySim.git --recursive
+WORKDIR CrazySim
+RUN apt remove -y \
+    python3-packaging \
+    python3-numpy
+RUN cd crazyflie-lib-python && \
+    SETUPTOOLS_SCM_PRETEND_VERSION=0.1.31 pip install -e .
+RUN mkdir -p crazyflie-firmware/sitl_make/build
+RUN cd crazyflie-firmware/sitl_make/build && \
+    cmake ..
+RUN cd crazyflie-firmware/sitl_make/build && \
+    make all
+WORKDIR /
+# Install cfclient
+RUN git clone https://github.com/llanesc/crazyflie-clients-python
+WORKDIR crazyflie-clients-python
+RUN pip3 install -e .
+WORKDIR /
+
+CMD  cd /CrazySim/crazyflie-firmware && \
+    bash tools/crazyflie-simulation/simulator_files/gazebo/launch/sitl_singleagent.sh -m crazyflie -x 0 -y 0 & \
+    cfclient
